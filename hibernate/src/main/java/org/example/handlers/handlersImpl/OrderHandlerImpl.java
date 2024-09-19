@@ -42,7 +42,15 @@ public class OrderHandlerImpl implements OrdersHandler {
 
     @Override
     public Optional<Order> findOrder(Integer number) {
-        return Optional.ofNullable(hibernateContext.submit(session -> session.get(Order.class, number)));
+        return Optional.ofNullable(hibernateContext.submit(session -> session.createQuery(
+                "SELECT o " +
+                    "FROM Order o " +
+                    "LEFT JOIN FETCH o.lineItems li " +
+                    "LEFT JOIN FETCH o.customer c " +
+                    "WHERE o.orderId = :orderId", Order.class
+            )
+             .setParameter("orderId", number)
+             .getSingleResult()));
     }
 
     @Override
@@ -68,3 +76,4 @@ public class OrderHandlerImpl implements OrdersHandler {
         });
     }
 }
+
