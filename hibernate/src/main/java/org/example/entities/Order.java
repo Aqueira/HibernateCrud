@@ -3,6 +3,7 @@ package org.example.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
 
 
 @NoArgsConstructor
@@ -24,4 +25,7 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
     private Customer customer;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")  //
+    private List<LineItem> lineItems;
 }
