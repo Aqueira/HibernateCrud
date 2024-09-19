@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <!-- Настройки источника данных -->
+    <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/postgres</property>
+    <property name="hibernate.connection.username">postgres</property>
+    <property name="hibernate.connection.password">postgres</property>
+    <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+    <property name="hibernate.transaction.jta.platform">org.hibernate.engine.transaction.jta.platform.internal.JBossAppServerJtaPlatform</property>
+
+    <!-- Настройки HikariCP -->
+    <property name="hibernate.hikari.jdbcUrl">jdbc:postgresql://localhost:5432/postgres</property>
+    <property name="hibernate.hikari.username">postgres</property>
+    <property name="hibernate.hikari.password">postgres</property>
+    <property name="hibernate.hikari.driverClassName">org.postgresql.Driver</property>
+    <property name="hibernate.hikari.minimumIdle">1</property>
+    <property name="hibernate.hikari.maximumPoolSize">3</property>
+    <property name="hibernate.hikari.idleTimeout">30000</property>
+    <property name="hibernate.hikari.poolName">MyHikariPool</property>
+
+    <!-- Другие настройки -->
+    <property name="hibernate.hbm2ddl.auto">update</property>
+    <property name="hibernate.show_sql">true</property>
+  </session-factory>
+</hibernate-configuration>
