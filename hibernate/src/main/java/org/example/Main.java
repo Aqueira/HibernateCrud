@@ -18,26 +18,26 @@ public class Main {
         try(HibernateContext hibernateContext = new HibernateContext()){
             CustomersHandler customerImpl = new CustomerHandlerImpl(hibernateContext);
             OrdersHandler orderImpl = new OrderHandlerImpl(hibernateContext);
-            customerImpl.createCustomer("Gitler", "Poland");
+            customerImpl.createCustomer("test", "test");
             Optional<Customer> customer = customerImpl.findCustomer(1);
             List<LineItem> list = new ArrayList<>();
             LineItem item1 = LineItem
                 .builder()
-                .productName("PenisXXL")
+                .productName("test1")
                 .price(30.35)
                 .quantity(30)
                 .build();
 
             LineItem item2 = LineItem
                 .builder()
-                .productName("PenisL")
+                .productName("test2")
                 .price(30.90)
                 .quantity(25)
                 .build();
 
             list.add(item1);
             list.add(item2);
-            orderImpl.placeOrder(customer.get(),"PENISKA", list);
+            orderImpl.placeOrder(customer.get(),"test", list);
             orderImpl.deleteOrder(3);
             customerImpl.deleteCustomer(21);
             customer.ifPresent(value -> System.out.println(value.getOrders()));
